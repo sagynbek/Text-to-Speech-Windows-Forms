@@ -39,6 +39,9 @@
             this.volumeLbl = new System.Windows.Forms.Label();
             this.rateLbl = new System.Windows.Forms.Label();
             this.sliderRate = new System.Windows.Forms.TrackBar();
+            this.fileNameTxt = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.notificationLbl = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.sliderVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderRate)).BeginInit();
             this.SuspendLayout();
@@ -47,10 +50,10 @@
             // 
             this.listenBtn.BackColor = System.Drawing.Color.DarkCyan;
             this.listenBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.listenBtn.Location = new System.Drawing.Point(594, 335);
-            this.listenBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.listenBtn.Location = new System.Drawing.Point(662, 432);
+            this.listenBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listenBtn.Name = "listenBtn";
-            this.listenBtn.Size = new System.Drawing.Size(89, 57);
+            this.listenBtn.Size = new System.Drawing.Size(104, 66);
             this.listenBtn.TabIndex = 0;
             this.listenBtn.Text = "Listen";
             this.listenBtn.UseVisualStyleBackColor = false;
@@ -60,10 +63,10 @@
             // 
             this.saveBtn.BackColor = System.Drawing.Color.DarkGreen;
             this.saveBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.saveBtn.Location = new System.Drawing.Point(704, 335);
-            this.saveBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.saveBtn.Location = new System.Drawing.Point(791, 432);
+            this.saveBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(89, 57);
+            this.saveBtn.Size = new System.Drawing.Size(104, 66);
             this.saveBtn.TabIndex = 1;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = false;
@@ -72,39 +75,40 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 120);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(17, 151);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.Size = new System.Drawing.Size(30, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Text";
             // 
             // textToRead
             // 
-            this.textToRead.Location = new System.Drawing.Point(44, 144);
-            this.textToRead.Margin = new System.Windows.Forms.Padding(2);
+            this.textToRead.Location = new System.Drawing.Point(20, 174);
+            this.textToRead.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textToRead.Multiline = true;
             this.textToRead.Name = "textToRead";
-            this.textToRead.Size = new System.Drawing.Size(750, 187);
+            this.textToRead.Size = new System.Drawing.Size(875, 216);
             this.textToRead.TabIndex = 3;
             // 
             // cmbVoice
             // 
+            this.cmbVoice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbVoice.FormattingEnabled = true;
-            this.cmbVoice.Location = new System.Drawing.Point(44, 67);
-            this.cmbVoice.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbVoice.Location = new System.Drawing.Point(20, 43);
+            this.cmbVoice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbVoice.Name = "cmbVoice";
-            this.cmbVoice.Size = new System.Drawing.Size(269, 21);
+            this.cmbVoice.Size = new System.Drawing.Size(253, 23);
             this.cmbVoice.TabIndex = 4;
             // 
             // stopBtn
             // 
             this.stopBtn.BackColor = System.Drawing.Color.DarkRed;
+            this.stopBtn.Enabled = false;
             this.stopBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.stopBtn.Location = new System.Drawing.Point(467, 335);
-            this.stopBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.stopBtn.Location = new System.Drawing.Point(514, 432);
+            this.stopBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stopBtn.Name = "stopBtn";
-            this.stopBtn.Size = new System.Drawing.Size(104, 57);
+            this.stopBtn.Size = new System.Drawing.Size(122, 66);
             this.stopBtn.TabIndex = 5;
             this.stopBtn.Text = "Stop";
             this.stopBtn.UseVisualStyleBackColor = false;
@@ -113,58 +117,96 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 42);
+            this.label2.Location = new System.Drawing.Point(17, 15);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.Size = new System.Drawing.Size(37, 15);
             this.label2.TabIndex = 6;
             this.label2.Text = "Voice";
             // 
             // sliderVolume
             // 
-            this.sliderVolume.Location = new System.Drawing.Point(414, 67);
+            this.sliderVolume.Location = new System.Drawing.Point(327, 34);
+            this.sliderVolume.Margin = new System.Windows.Forms.Padding(4);
             this.sliderVolume.Maximum = 100;
             this.sliderVolume.Name = "sliderVolume";
-            this.sliderVolume.Size = new System.Drawing.Size(157, 45);
+            this.sliderVolume.Size = new System.Drawing.Size(357, 45);
             this.sliderVolume.TabIndex = 7;
-            this.sliderVolume.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.sliderVolume.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.sliderVolume.Value = 100;
             this.sliderVolume.Scroll += new System.EventHandler(this.sliderVolume_Scroll);
             // 
             // volumeLbl
             // 
             this.volumeLbl.AutoSize = true;
-            this.volumeLbl.Location = new System.Drawing.Point(425, 42);
+            this.volumeLbl.Location = new System.Drawing.Point(334, 15);
+            this.volumeLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.volumeLbl.Name = "volumeLbl";
-            this.volumeLbl.Size = new System.Drawing.Size(42, 13);
+            this.volumeLbl.Size = new System.Drawing.Size(49, 15);
             this.volumeLbl.TabIndex = 8;
             this.volumeLbl.Text = "Volume";
             // 
             // rateLbl
             // 
             this.rateLbl.AutoSize = true;
-            this.rateLbl.Location = new System.Drawing.Point(653, 42);
+            this.rateLbl.Location = new System.Drawing.Point(723, 9);
+            this.rateLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.rateLbl.Name = "rateLbl";
-            this.rateLbl.Size = new System.Drawing.Size(30, 13);
+            this.rateLbl.Size = new System.Drawing.Size(33, 15);
             this.rateLbl.TabIndex = 9;
             this.rateLbl.Text = "Rate";
             // 
             // sliderRate
             // 
-            this.sliderRate.Location = new System.Drawing.Point(639, 67);
+            this.sliderRate.Location = new System.Drawing.Point(716, 34);
+            this.sliderRate.Margin = new System.Windows.Forms.Padding(4);
             this.sliderRate.Minimum = -10;
             this.sliderRate.Name = "sliderRate";
-            this.sliderRate.Size = new System.Drawing.Size(154, 45);
+            this.sliderRate.Size = new System.Drawing.Size(179, 45);
             this.sliderRate.TabIndex = 11;
-            this.sliderRate.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.sliderRate.Value = 1;
+            this.sliderRate.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.sliderRate.Scroll += new System.EventHandler(this.sliderRate_Scroll);
+            // 
+            // fileNameTxt
+            // 
+            this.fileNameTxt.Location = new System.Drawing.Point(20, 112);
+            this.fileNameTxt.Margin = new System.Windows.Forms.Padding(4);
+            this.fileNameTxt.Name = "fileNameTxt";
+            this.fileNameTxt.Size = new System.Drawing.Size(253, 21);
+            this.fileNameTxt.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 88);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 15);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "File name";
+            // 
+            // notificationLbl
+            // 
+            this.notificationLbl.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.notificationLbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.notificationLbl.Enabled = false;
+            this.notificationLbl.ForeColor = System.Drawing.Color.Green;
+            this.notificationLbl.Location = new System.Drawing.Point(20, 407);
+            this.notificationLbl.Name = "notificationLbl";
+            this.notificationLbl.Size = new System.Drawing.Size(875, 14);
+            this.notificationLbl.TabIndex = 16;
+            this.notificationLbl.Text = "Notification text";
+            this.notificationLbl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(827, 424);
+            this.ClientSize = new System.Drawing.Size(909, 501);
+            this.Controls.Add(this.notificationLbl);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.fileNameTxt);
             this.Controls.Add(this.sliderRate);
             this.Controls.Add(this.rateLbl);
             this.Controls.Add(this.volumeLbl);
@@ -176,7 +218,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.listenBtn);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Main";
             this.Text = "Main";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -200,6 +244,9 @@
         private System.Windows.Forms.Label volumeLbl;
         private System.Windows.Forms.Label rateLbl;
         private System.Windows.Forms.TrackBar sliderRate;
+        private System.Windows.Forms.TextBox fileNameTxt;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox notificationLbl;
     }
 }
 

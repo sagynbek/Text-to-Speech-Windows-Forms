@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Speech.Synthesis;
 using System.IO;
+using System.Speech.Synthesis;
+using System.Speech.Synthesis.TtsEngine;
 
 
 namespace Text_to_Speech
@@ -22,7 +23,7 @@ namespace Text_to_Speech
             LoadInstalledVoices();
             UpdateRateLabel();
             UpdateVolumeLabel();
-            textToRead.Text = "Hellow World!";
+            Notify("");
         }
 
         private void sliderRate_Scroll(object sender, EventArgs e)
@@ -43,6 +44,8 @@ namespace Text_to_Speech
         private void listenBtn_Click(object sender, EventArgs e)
         {
             ReInitSynthesizer();
+
+            //speechSynthesizer.SpeakSsmlAsync(GetTextAsSSML());
             speechSynthesizer.SpeakAsync(textToRead.Text);
         }
 
@@ -51,12 +54,14 @@ namespace Text_to_Speech
             ReInitSynthesizer();
             var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             path += "\\Audio Files\\";
-            Directory.CreateDirectory(path);
-            var audioName = "Audio" + this.audioCount.ToString() + ".wav";
+            Directory.CreateDirectory(path); // Create directory on Desktop
+
+            var fileName = fileNameTxt.Text.Length>0 ? fileNameTxt.Text : ("Audio" + (this.audioCount++).ToString());
+            var audioName = fileName + ".wav";
+
             speechSynthesizer.SetOutputToWaveFile(path + audioName);
             speechSynthesizer.SpeakAsync(textToRead.Text);
-
-            this.audioCount++;
+            Notify("Saved as: " + audioName);
         }
 
 
@@ -70,11 +75,13 @@ namespace Text_to_Speech
                 VoiceInfo infoVoice = voice.VoiceInfo;
                 cmbVoice.Items.Add(infoVoice.Name);
             }
+            
             cmbVoice.SelectedItem = speechSynthesizer.Voice.Name;
             speechSynthesizer.Dispose();
         }
         private void ReInitSynthesizer()
         {
+            Notify("");
             StopSynthesizer();
             speechSynthesizer = new SpeechSynthesizer();
             speechSynthesizer.SpeakStarted += new EventHandler<SpeakStartedEventArgs>(SynthesizerSpeakStarted);
@@ -109,13 +116,28 @@ namespace Text_to_Speech
         private void SynthesizerSpeakStarted(object sender, SpeakStartedEventArgs e)
         {
             stopBtn.Enabled = true;
-            //stopBtn.Visible = true;
         }
         private void SynthesizerSpeakCompleted(object sender, SpeakCompletedEventArgs e)
         {
             stopBtn.Enabled = false;
-            //stopBtn.Visible = false;
+        }
+        //private string GetTextAsSSML()
+        //{
+        //    string str = "<speak version=\"1.0\"";
+        //    str += " xmlns=\"http://www.w3.org/2001/10/synthesis\"";
+        //    str += " xml:lang=\"en-US\">";
+        //    str += "<say-as type=\"date:mdy\"> 1/29/2009 </say-as>";
+        //    str += "</speak>";
+        //}
+        private void Notify(string text)
+        {
+            notificationLbl.Text = text;
         }
         #endregion
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
