@@ -46,7 +46,7 @@ namespace Text_to_Speech
             ReInitSynthesizer();
 
             speechSynthesizer.SpeakSsmlAsync(GetSsmlText());
-            //speechSynthesizer.SpeakAsync(textToRead.Text);
+            //speechSynthesizer.SpeakAsync(GetTextToRead());
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
@@ -60,7 +60,7 @@ namespace Text_to_Speech
             var audioName = fileName + ".wav";
 
             speechSynthesizer.SetOutputToWaveFile(path + audioName);
-            speechSynthesizer.SpeakAsync(textToRead.Text);
+            speechSynthesizer.SpeakAsync(GetTextToSave());
             Notify("Saved as: " + audioName);
         }
 
@@ -123,7 +123,15 @@ namespace Text_to_Speech
         }
         private string GetSsmlText()
         {
-            return SsmlConverter.ConvertTextIntoSSML(textToRead.Text, speechSynthesizer);
+            return SsmlConverter.ConvertTextIntoSSML(GetTextToRead(), speechSynthesizer);
+        }
+        private string GetTextToRead()
+        {
+            return textToRead.SelectionLength > 0 ? textToRead.SelectedText : textToRead.Text;
+        }
+        private string GetTextToSave()
+        {
+            return textToRead.Text;
         }
         private void Notify(string text)
         {
