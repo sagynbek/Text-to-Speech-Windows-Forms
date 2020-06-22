@@ -6,4 +6,5 @@ TODO:
 - [x] Download Audio
 - [x] Name of Audio
 - [ ] Check out JIT Debugging
-- [ ] Support SSML
+- [x] Support SSML
+- [ ] Better UI/UX for SSML options
