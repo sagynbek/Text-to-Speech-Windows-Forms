@@ -45,8 +45,8 @@ namespace Text_to_Speech
         {
             ReInitSynthesizer();
 
-            //speechSynthesizer.SpeakSsmlAsync(GetTextAsSSML());
-            speechSynthesizer.SpeakAsync(textToRead.Text);
+            speechSynthesizer.SpeakSsmlAsync(GetSsmlText());
+            //speechSynthesizer.SpeakAsync(textToRead.Text);
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
@@ -121,14 +121,10 @@ namespace Text_to_Speech
         {
             stopBtn.Enabled = false;
         }
-        //private string GetTextAsSSML()
-        //{
-        //    string str = "<speak version=\"1.0\"";
-        //    str += " xmlns=\"http://www.w3.org/2001/10/synthesis\"";
-        //    str += " xml:lang=\"en-US\">";
-        //    str += "<say-as type=\"date:mdy\"> 1/29/2009 </say-as>";
-        //    str += "</speak>";
-        //}
+        private string GetSsmlText()
+        {
+            return SsmlConverter.ConvertTextIntoSSML(textToRead.Text, speechSynthesizer);
+        }
         private void Notify(string text)
         {
             notificationLbl.Text = text;
