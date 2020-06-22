@@ -42,6 +42,7 @@
             this.fileNameTxt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.notificationLbl = new System.Windows.Forms.TextBox();
+            this.selectActiveTextBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sliderVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderRate)).BeginInit();
             this.SuspendLayout();
@@ -198,12 +199,26 @@
             this.notificationLbl.Text = "Notification text";
             this.notificationLbl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // selectActiveTextBtn
+            // 
+            this.selectActiveTextBtn.BackColor = System.Drawing.Color.OliveDrab;
+            this.selectActiveTextBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.selectActiveTextBtn.Location = new System.Drawing.Point(390, 432);
+            this.selectActiveTextBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.selectActiveTextBtn.Name = "selectActiveTextBtn";
+            this.selectActiveTextBtn.Size = new System.Drawing.Size(104, 66);
+            this.selectActiveTextBtn.TabIndex = 17;
+            this.selectActiveTextBtn.Text = "Select Text";
+            this.selectActiveTextBtn.UseVisualStyleBackColor = false;
+            this.selectActiveTextBtn.Click += new System.EventHandler(this.selectActiveTextBtn_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(909, 501);
+            this.Controls.Add(this.selectActiveTextBtn);
             this.Controls.Add(this.notificationLbl);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.fileNameTxt);
@@ -247,6 +262,7 @@
         private System.Windows.Forms.TextBox fileNameTxt;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox notificationLbl;
+        private System.Windows.Forms.Button selectActiveTextBtn;
     }
 }
 

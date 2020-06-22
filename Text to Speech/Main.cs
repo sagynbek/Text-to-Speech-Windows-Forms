@@ -10,7 +10,9 @@ namespace Text_to_Speech
     public partial class Main : Form
     {
         SpeechSynthesizer speechSynthesizer;
+        SelectableText selectableTextInstance;
         int audioCount = 0;
+        
 
 
         public Main()
@@ -24,6 +26,8 @@ namespace Text_to_Speech
             UpdateRateLabel();
             UpdateVolumeLabel();
             Notify("");
+
+            selectableTextInstance = new SelectableText(textToRead);
         }
 
         private void sliderRate_Scroll(object sender, EventArgs e)
@@ -131,7 +135,7 @@ namespace Text_to_Speech
         }
         private string GetTextToSave()
         {
-            return textToRead.Text;
+            return textToRead.SelectionLength > 0 ? textToRead.SelectedText : textToRead.Text;
         }
         private void Notify(string text)
         {
@@ -142,6 +146,24 @@ namespace Text_to_Speech
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void selectActiveTextBtn_Click(object sender, EventArgs e)
+        {
+            // Button text: "Show Original"
+            if (selectableTextInstance.IsSelectedDisplayedOnly())
+            {
+                selectableTextInstance.DisplayOriginal();
+            }
+            // Button text: "Select Text"
+            else
+            { 
+                selectableTextInstance.SelectActiveText();
+            }
+
+            selectActiveTextBtn.Text = selectableTextInstance.IsSelectedDisplayedOnly() ? 
+                "Show Original" 
+                : "Select Text";
         }
     }
 }
