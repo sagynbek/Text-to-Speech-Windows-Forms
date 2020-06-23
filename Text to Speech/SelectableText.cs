@@ -18,6 +18,7 @@ namespace Text_to_Speech
         private TextBox textBox;
         private string originalText = "";
         private SelectableTextState state = SelectableTextState.None;
+        private int selectionLength, selectionStart;
 
         public SelectableText(TextBox textBox)
         {
@@ -29,7 +30,10 @@ namespace Text_to_Speech
             if (textBox.SelectionLength > 0)
             {
                 originalText = textBox.Text;
+                selectionStart = textBox.SelectionStart;
+                selectionLength = textBox.SelectionLength;
                 textBox.Text = textBox.SelectedText;
+
                 state = SelectableTextState.OnlySelectedDisplayed;
 
                 return true;
@@ -51,6 +55,7 @@ namespace Text_to_Speech
 
             state = SelectableTextState.None;
             textBox.Text = originalText;
+            textBox.Select(selectionStart, selectionLength);
             originalText = "";
         }
     }

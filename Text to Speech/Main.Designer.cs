@@ -28,6 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Break",
+            "strength",
+            "time"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            "p/s elements",
+            "none"}, -1);
             this.listenBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,6 +50,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.notificationLbl = new System.Windows.Forms.TextBox();
             this.selectActiveTextBtn = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.sliderVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderRate)).BeginInit();
             this.SuspendLayout();
@@ -84,11 +92,12 @@
             // 
             // textToRead
             // 
+            this.textToRead.HideSelection = false;
             this.textToRead.Location = new System.Drawing.Point(20, 174);
             this.textToRead.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textToRead.Multiline = true;
             this.textToRead.Name = "textToRead";
-            this.textToRead.Size = new System.Drawing.Size(875, 216);
+            this.textToRead.Size = new System.Drawing.Size(430, 216);
             this.textToRead.TabIndex = 3;
             // 
             // cmbVoice
@@ -212,12 +221,28 @@
             this.selectActiveTextBtn.UseVisualStyleBackColor = false;
             this.selectActiveTextBtn.Click += new System.EventHandler(this.selectActiveTextBtn_Click);
             // 
+            // listView1
+            // 
+            this.listView1.AllowDrop = true;
+            this.listView1.HideSelection = false;
+            listViewItem3.Tag = "insert";
+            listViewItem4.ToolTipText = "p is paragraph. s is sentence";
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+            this.listView1.Location = new System.Drawing.Point(547, 174);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(219, 130);
+            this.listView1.TabIndex = 18;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(909, 501);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.selectActiveTextBtn);
             this.Controls.Add(this.notificationLbl);
             this.Controls.Add(this.label3);
@@ -263,6 +288,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox notificationLbl;
         private System.Windows.Forms.Button selectActiveTextBtn;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 
