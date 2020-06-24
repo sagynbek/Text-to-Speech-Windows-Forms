@@ -100,6 +100,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectableText.cs" />
     <Compile Include="SsmlConverter.cs" />
+    <Compile Include="SsmlOption.cs" />
+    <Compile Include="SsmlOptionsController.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

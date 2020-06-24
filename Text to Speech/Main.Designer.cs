@@ -28,13 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Break",
-            "strength",
-            "time"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
-            "p/s elements",
-            "none"}, -1);
             this.listenBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,7 +43,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.notificationLbl = new System.Windows.Forms.TextBox();
             this.selectActiveTextBtn = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.ssmlMarkupLangListBox = new System.Windows.Forms.ListBox();
+            this.resetSsmlMarkupLangListBox = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sliderVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderRate)).BeginInit();
             this.SuspendLayout();
@@ -97,7 +91,7 @@
             this.textToRead.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textToRead.Multiline = true;
             this.textToRead.Name = "textToRead";
-            this.textToRead.Size = new System.Drawing.Size(430, 216);
+            this.textToRead.Size = new System.Drawing.Size(616, 216);
             this.textToRead.TabIndex = 3;
             // 
             // cmbVoice
@@ -221,20 +215,23 @@
             this.selectActiveTextBtn.UseVisualStyleBackColor = false;
             this.selectActiveTextBtn.Click += new System.EventHandler(this.selectActiveTextBtn_Click);
             // 
-            // listView1
+            // ssmlMarkupLangListBox
             // 
-            this.listView1.AllowDrop = true;
-            this.listView1.HideSelection = false;
-            listViewItem3.Tag = "insert";
-            listViewItem4.ToolTipText = "p is paragraph. s is sentence";
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.listView1.Location = new System.Drawing.Point(547, 174);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(219, 130);
-            this.listView1.TabIndex = 18;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.ssmlMarkupLangListBox.FormattingEnabled = true;
+            this.ssmlMarkupLangListBox.ItemHeight = 15;
+            this.ssmlMarkupLangListBox.Location = new System.Drawing.Point(644, 174);
+            this.ssmlMarkupLangListBox.Name = "ssmlMarkupLangListBox";
+            this.ssmlMarkupLangListBox.Size = new System.Drawing.Size(251, 169);
+            this.ssmlMarkupLangListBox.TabIndex = 19;
+            // 
+            // resetSsmlMarkupLangListBox
+            // 
+            this.resetSsmlMarkupLangListBox.Location = new System.Drawing.Point(644, 143);
+            this.resetSsmlMarkupLangListBox.Name = "resetSsmlMarkupLangListBox";
+            this.resetSsmlMarkupLangListBox.Size = new System.Drawing.Size(33, 23);
+            this.resetSsmlMarkupLangListBox.TabIndex = 20;
+            this.resetSsmlMarkupLangListBox.Text = "<<";
+            this.resetSsmlMarkupLangListBox.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -242,7 +239,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(909, 501);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.resetSsmlMarkupLangListBox);
+            this.Controls.Add(this.ssmlMarkupLangListBox);
             this.Controls.Add(this.selectActiveTextBtn);
             this.Controls.Add(this.notificationLbl);
             this.Controls.Add(this.label3);
@@ -288,7 +286,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox notificationLbl;
         private System.Windows.Forms.Button selectActiveTextBtn;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListBox ssmlMarkupLangListBox;
+        private System.Windows.Forms.Button resetSsmlMarkupLangListBox;
     }
 }
 

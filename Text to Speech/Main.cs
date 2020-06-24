@@ -11,6 +11,7 @@ namespace Text_to_Speech
     {
         SpeechSynthesizer speechSynthesizer;
         SelectableText selectableTextInstance;
+        SsmlOptionsController ssmlOptionsController;
         int audioCount = 0;
         
 
@@ -28,6 +29,7 @@ namespace Text_to_Speech
             Notify("");
 
             selectableTextInstance = new SelectableText(textToRead);
+            ssmlOptionsController = new SsmlOptionsController(resetSsmlMarkupLangListBox, ssmlMarkupLangListBox, textToRead);
         }
 
         private void sliderRate_Scroll(object sender, EventArgs e)
@@ -67,7 +69,6 @@ namespace Text_to_Speech
             speechSynthesizer.SpeakAsync(GetTextToSave());
             Notify("Saved as: " + audioName);
         }
-
 
         #region Local helpers
         private void LoadInstalledVoices()
@@ -142,11 +143,6 @@ namespace Text_to_Speech
             notificationLbl.Text = text;
         }
         #endregion
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void selectActiveTextBtn_Click(object sender, EventArgs e)
         {
