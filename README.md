@@ -1,6 +1,6 @@
 ## Text to Speech
  
-![Application image](./Images/application.png?raw=true)
+![Application image](./Images/application_1.0.0.png?raw=true)
 
 TODO:
 - [x] Download Audio
