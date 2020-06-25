@@ -45,6 +45,7 @@
             this.selectActiveTextBtn = new System.Windows.Forms.Button();
             this.ssmlMarkupLangListBox = new System.Windows.Forms.ListBox();
             this.resetSsmlMarkupLangListBox = new System.Windows.Forms.Button();
+            this.ssmlOptionBreadcrumbTxt = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.sliderVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderRate)).BeginInit();
             this.SuspendLayout();
@@ -219,19 +220,31 @@
             // 
             this.ssmlMarkupLangListBox.FormattingEnabled = true;
             this.ssmlMarkupLangListBox.ItemHeight = 15;
-            this.ssmlMarkupLangListBox.Location = new System.Drawing.Point(644, 174);
+            this.ssmlMarkupLangListBox.Location = new System.Drawing.Point(662, 174);
             this.ssmlMarkupLangListBox.Name = "ssmlMarkupLangListBox";
-            this.ssmlMarkupLangListBox.Size = new System.Drawing.Size(251, 169);
+            this.ssmlMarkupLangListBox.Size = new System.Drawing.Size(231, 214);
             this.ssmlMarkupLangListBox.TabIndex = 19;
             // 
             // resetSsmlMarkupLangListBox
             // 
-            this.resetSsmlMarkupLangListBox.Location = new System.Drawing.Point(644, 143);
+            this.resetSsmlMarkupLangListBox.Location = new System.Drawing.Point(662, 122);
             this.resetSsmlMarkupLangListBox.Name = "resetSsmlMarkupLangListBox";
             this.resetSsmlMarkupLangListBox.Size = new System.Drawing.Size(33, 23);
             this.resetSsmlMarkupLangListBox.TabIndex = 20;
-            this.resetSsmlMarkupLangListBox.Text = "<<";
+            this.resetSsmlMarkupLangListBox.Text = "<";
             this.resetSsmlMarkupLangListBox.UseVisualStyleBackColor = true;
+            // 
+            // ssmlOptionBreadcrumbTxt
+            // 
+            this.ssmlOptionBreadcrumbTxt.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ssmlOptionBreadcrumbTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ssmlOptionBreadcrumbTxt.Enabled = false;
+            this.ssmlOptionBreadcrumbTxt.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.ssmlOptionBreadcrumbTxt.Location = new System.Drawing.Point(662, 151);
+            this.ssmlOptionBreadcrumbTxt.Name = "ssmlOptionBreadcrumbTxt";
+            this.ssmlOptionBreadcrumbTxt.Size = new System.Drawing.Size(235, 14);
+            this.ssmlOptionBreadcrumbTxt.TabIndex = 21;
+            this.ssmlOptionBreadcrumbTxt.Text = "Breadcrumb";
             // 
             // Main
             // 
@@ -239,6 +252,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(909, 501);
+            this.Controls.Add(this.ssmlOptionBreadcrumbTxt);
             this.Controls.Add(this.resetSsmlMarkupLangListBox);
             this.Controls.Add(this.ssmlMarkupLangListBox);
             this.Controls.Add(this.selectActiveTextBtn);
@@ -288,6 +302,7 @@
         private System.Windows.Forms.Button selectActiveTextBtn;
         private System.Windows.Forms.ListBox ssmlMarkupLangListBox;
         private System.Windows.Forms.Button resetSsmlMarkupLangListBox;
+        private System.Windows.Forms.TextBox ssmlOptionBreadcrumbTxt;
     }
 }
 

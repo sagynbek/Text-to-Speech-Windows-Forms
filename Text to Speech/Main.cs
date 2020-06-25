@@ -29,7 +29,7 @@ namespace Text_to_Speech
             Notify("");
 
             selectableTextInstance = new SelectableText(textToRead);
-            ssmlOptionsController = new SsmlOptionsController(resetSsmlMarkupLangListBox, ssmlMarkupLangListBox, textToRead);
+            ssmlOptionsController = new SsmlOptionsController(resetSsmlMarkupLangListBox, ssmlMarkupLangListBox, textToRead, ssmlOptionBreadcrumbTxt);
         }
 
         private void sliderRate_Scroll(object sender, EventArgs e)

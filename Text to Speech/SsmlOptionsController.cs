@@ -10,15 +10,17 @@ namespace Text_to_Speech
     class SsmlOptionsController
     {
         ListBox listBox;
-        TextBox textBox;
+        TextBox textToRead;
         Button resetButton;
         List<SsmlOption> options = new List<SsmlOption>();
-        List<SsmlOption> activeOptions = new List<SsmlOption>();
+        List<string> trackUserOptions = new List<string>();
+        TextBox breadcrumbText;
 
-        public SsmlOptionsController(Button resetButton, ListBox listBox, TextBox textBox)
+        public SsmlOptionsController(Button resetButton, ListBox listBox, TextBox textBox, TextBox ssmlOptionBreadcrumbTxt)
         {
             this.listBox = listBox;
-            this.textBox = textBox;
+            this.textToRead = textBox;
+            this.breadcrumbText = ssmlOptionBreadcrumbTxt;
             this.resetButton = resetButton;
 
             this.InitializeOptions();
@@ -36,38 +38,49 @@ namespace Text_to_Speech
             this.options.Clear();
 
             {
-                SsmlOption breakOption = new SsmlOption();
-                breakOption.text = "Break";
+                SsmlOption breakOption = new SsmlOption("Break");
 
-                SsmlOption strengthOption = new SsmlOption();
-                strengthOption.text = "strength";
+                SsmlOption strengthOption = new SsmlOption("strength");
 
+                SsmlOption strengthSubOption1 = new SsmlOption("x-weak", OptionType.Insert);
+                SsmlOption strengthSubOption2 = new SsmlOption("x-strong", OptionType.Insert);
 
-                SsmlOption strengthSubOption1 = new SsmlOption();
-                strengthSubOption1.text = "x-weak";
-                strengthSubOption1.optionType = OptionType.Insert;
-
-                SsmlOption strengthSubOption2 = new SsmlOption();
-                strengthSubOption2.text = "x-strong";
-                strengthSubOption2.optionType = OptionType.Insert;
-
-                strengthOption.children.Add(strengthSubOption1);
-                strengthOption.children.Add(strengthSubOption2);
+                strengthOption.AddToChildren(strengthSubOption1);
+                strengthOption.AddToChildren(strengthSubOption2);
 
 
-                breakOption.children.Add(strengthOption);
+                breakOption.AddToChildren(strengthOption);
                 
                 this.options.Add(breakOption);
             }
+        }
 
-            this.activeOptions = this.options;
+        private List<SsmlOption> GetActiveOptions()
+        {
+            List<SsmlOption> FindChildrenOfItem(List<SsmlOption> targetOptions, string item)
+            {
+                foreach(SsmlOption option in targetOptions) {
+                    if(item == option.text)
+                    {
+                        return option.children;
+                    }
+                }
+                return null;
+            }
+
+            var currentOptions = options;
+            foreach(string selectedItem in trackUserOptions)
+            {
+                currentOptions = FindChildrenOfItem(currentOptions, selectedItem);
+            }
+            return currentOptions;
         }
 
         private void HandleKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.ResetOptions();
+                ResetOptions();
             }
         }
 
@@ -75,11 +88,12 @@ namespace Text_to_Speech
         {
             resetButton.Visible = true;
 
-            foreach (SsmlOption option in this.activeOptions)
+            foreach (SsmlOption option in GetActiveOptions())
             {
                 if(listBox.SelectedItem == option.text)
                 {
-                    activeOptions = option.children;
+                    trackUserOptions.Add(option.text);
+                    break;
                 }
             }
             this.SetItems();
@@ -87,24 +101,37 @@ namespace Text_to_Speech
 
         private void resetSsmlMarkupLangListBox_Click(object sender, EventArgs e)
         {
-            this.ResetOptions();
+            trackUserOptions.RemoveAt(trackUserOptions.Count - 1);
+            if (trackUserOptions.Count == 1)
+            {
+                resetButton.Visible = false;
+            }
+            this.SetItems();
         }
 
         private void ResetOptions()
         {
             resetButton.Visible = false;
-            activeOptions = options;
+            trackUserOptions.Clear();
             this.SetItems();
         }
 
         private void SetItems()
         {
             this.listBox.Items.Clear();
+            var breadText = "";
 
-            foreach(SsmlOption option in this.activeOptions)
+            foreach(SsmlOption option in GetActiveOptions())
             {
                 this.listBox.Items.Add(option.text);
             }
+
+            for(var it= 0; it< trackUserOptions.Count; it++)
+            {
+                if (breadText!="") { breadText += " > "; }
+                breadText += trackUserOptions[it];
+            }
+            breadcrumbText.Text = breadText;
         }
 
     }
