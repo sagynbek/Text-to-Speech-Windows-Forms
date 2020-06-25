@@ -86,14 +86,52 @@ namespace Text_to_Speech
 
         private void HandleDoubleClick(object sender, EventArgs e)
         {
+            SsmlOption selectedOption = null;
             resetButton.Visible = true;
-
+            
             foreach (SsmlOption option in GetActiveOptions())
             {
                 if(listBox.SelectedItem == option.text)
                 {
-                    trackUserOptions.Add(option.text);
+                    selectedOption = option;
                     break;
+                }
+            }
+
+            if( selectedOption == null) { return; }
+
+            HandleSelectNewOption(selectedOption);
+        }
+
+        private void HandleSelectNewOption(SsmlOption option)
+        {
+            // Go deep into selectedOption
+            if (option.optionType == OptionType.None)
+            {
+                trackUserOptions.Add(option.text);
+            }
+            // Perform action
+            else if(option.optionType == OptionType.Insert)
+            {
+                if (textToRead.SelectionStart>=0)
+                {
+                    textToRead.Text = textToRead.Text.Insert(textToRead.SelectionStart, "Test");
+                    ResetOptions();
+                }
+                else
+                {
+                    MessageBox.Show("Please put cursor on the place in textarea");
+                }
+            }
+            else if (option.optionType == OptionType.Wrap)
+            {
+                if (textToRead.SelectionLength > 0)
+                {
+                    /** TODO continue */
+                }
+                else
+                {
+                    MessageBox.Show("Please select text in textarea");
                 }
             }
             this.SetItems();
