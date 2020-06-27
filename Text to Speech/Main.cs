@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.IO;
 using System.Speech.Synthesis;
+using System.Collections.Generic;
 using System.Speech.Synthesis.TtsEngine;
 
 
@@ -11,6 +12,9 @@ namespace Text_to_Speech
     {
         SpeechSynthesizer speechSynthesizer;
         SelectableText selectableTextInstance;
+        SsmlOptionsController ssmlOptionsController;
+        AudioNameGenerator audioNameGenerator;
+        bool isSsmlMarkupInUse = true;
         int audioCount = 0;
         
 
@@ -28,6 +32,8 @@ namespace Text_to_Speech
             Notify("");
 
             selectableTextInstance = new SelectableText(textToRead);
+            ssmlOptionsController = new SsmlOptionsController(resetSsmlMarkupLangListBox, ssmlMarkupLangListBox, textToRead, ssmlOptionBreadcrumbTxt);
+            audioNameGenerator = new AudioNameGenerator(fileNameTxt);
         }
 
         private void sliderRate_Scroll(object sender, EventArgs e)
@@ -49,8 +55,8 @@ namespace Text_to_Speech
         {
             ReInitSynthesizer();
 
-            speechSynthesizer.SpeakSsmlAsync(GetSsmlText());
-            //speechSynthesizer.SpeakAsync(GetTextToRead());
+            if( isSsmlMarkupInUse) { speechSynthesizer.SpeakSsmlAsync(GetSsmlText()); }
+            else { speechSynthesizer.SpeakAsync(GetTextToRead()); }
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
@@ -60,14 +66,16 @@ namespace Text_to_Speech
             path += "\\Audio Files\\";
             Directory.CreateDirectory(path); // Create directory on Desktop
 
-            var fileName = fileNameTxt.Text.Length>0 ? fileNameTxt.Text : ("Audio" + (this.audioCount++).ToString());
+            var fileName = audioNameGenerator.GetFileName();
             var audioName = fileName + ".wav";
 
             speechSynthesizer.SetOutputToWaveFile(path + audioName);
-            speechSynthesizer.SpeakAsync(GetTextToSave());
+
+            if (isSsmlMarkupInUse) { speechSynthesizer.SpeakSsmlAsync(GetSsmlTextToSave()); }
+            else { speechSynthesizer.SpeakAsync(GetTextToSave()); }
+
             Notify("Saved as: " + audioName);
         }
-
 
         #region Local helpers
         private void LoadInstalledVoices()
@@ -129,6 +137,10 @@ namespace Text_to_Speech
         {
             return SsmlConverter.ConvertTextIntoSSML(GetTextToRead(), speechSynthesizer);
         }
+        private string GetSsmlTextToSave()
+        {
+            return SsmlConverter.ConvertTextIntoSSML(GetTextToSave(), speechSynthesizer);
+        }
         private string GetTextToRead()
         {
             return textToRead.SelectionLength > 0 ? textToRead.SelectedText : textToRead.Text;
@@ -143,11 +155,6 @@ namespace Text_to_Speech
         }
         #endregion
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void selectActiveTextBtn_Click(object sender, EventArgs e)
         {
             // Button text: "Show Original"
@@ -155,15 +162,23 @@ namespace Text_to_Speech
             {
                 selectableTextInstance.DisplayOriginal();
             }
-            // Button text: "Select Text"
+            // Button text: "Isolate text"
             else
             { 
-                selectableTextInstance.SelectActiveText();
+                selectableTextInstance.IsolateSelectedText();
             }
 
             selectActiveTextBtn.Text = selectableTextInstance.IsSelectedDisplayedOnly() ? 
                 "Show Original" 
-                : "Select Text";
+                : "Isolate text";
+        }
+
+        private void toggleSsmlMarkupUseBtn_Click(object sender, EventArgs e)
+        {
+            isSsmlMarkupInUse = !isSsmlMarkupInUse;
+
+            ssmlOptionsController.ToggleVisibility(isSsmlMarkupInUse);
+            toggleSsmlMarkupUseBtn.Text = isSsmlMarkupInUse ? "Basic mode" : "Advanced mode";
         }
     }
 }

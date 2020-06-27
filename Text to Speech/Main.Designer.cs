@@ -28,13 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Break",
-            "strength",
-            "time"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
-            "p/s elements",
-            "none"}, -1);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.listenBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,19 +44,23 @@
             this.label3 = new System.Windows.Forms.Label();
             this.notificationLbl = new System.Windows.Forms.TextBox();
             this.selectActiveTextBtn = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.ssmlMarkupLangListBox = new System.Windows.Forms.ListBox();
+            this.resetSsmlMarkupLangListBox = new System.Windows.Forms.Button();
+            this.ssmlOptionBreadcrumbTxt = new System.Windows.Forms.TextBox();
+            this.toggleSsmlMarkupUseBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sliderVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderRate)).BeginInit();
             this.SuspendLayout();
             // 
             // listenBtn
             // 
-            this.listenBtn.BackColor = System.Drawing.Color.DarkCyan;
+            this.listenBtn.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.listenBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.listenBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.listenBtn.Location = new System.Drawing.Point(662, 432);
+            this.listenBtn.Location = new System.Drawing.Point(641, 437);
             this.listenBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listenBtn.Name = "listenBtn";
-            this.listenBtn.Size = new System.Drawing.Size(104, 66);
+            this.listenBtn.Size = new System.Drawing.Size(104, 56);
             this.listenBtn.TabIndex = 0;
             this.listenBtn.Text = "Listen";
             this.listenBtn.UseVisualStyleBackColor = false;
@@ -71,11 +69,12 @@
             // saveBtn
             // 
             this.saveBtn.BackColor = System.Drawing.Color.DarkGreen;
+            this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.saveBtn.Location = new System.Drawing.Point(791, 432);
+            this.saveBtn.Location = new System.Drawing.Point(791, 437);
             this.saveBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(104, 66);
+            this.saveBtn.Size = new System.Drawing.Size(104, 56);
             this.saveBtn.TabIndex = 1;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = false;
@@ -97,7 +96,7 @@
             this.textToRead.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textToRead.Multiline = true;
             this.textToRead.Name = "textToRead";
-            this.textToRead.Size = new System.Drawing.Size(430, 216);
+            this.textToRead.Size = new System.Drawing.Size(625, 216);
             this.textToRead.TabIndex = 3;
             // 
             // cmbVoice
@@ -114,11 +113,12 @@
             // 
             this.stopBtn.BackColor = System.Drawing.Color.DarkRed;
             this.stopBtn.Enabled = false;
+            this.stopBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stopBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.stopBtn.Location = new System.Drawing.Point(514, 432);
+            this.stopBtn.Location = new System.Drawing.Point(513, 437);
             this.stopBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stopBtn.Name = "stopBtn";
-            this.stopBtn.Size = new System.Drawing.Size(122, 66);
+            this.stopBtn.Size = new System.Drawing.Size(122, 56);
             this.stopBtn.TabIndex = 5;
             this.stopBtn.Text = "Stop";
             this.stopBtn.UseVisualStyleBackColor = false;
@@ -191,9 +191,9 @@
             this.label3.Location = new System.Drawing.Point(17, 88);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 15);
+            this.label3.Size = new System.Drawing.Size(147, 15);
             this.label3.TabIndex = 13;
-            this.label3.Text = "File name";
+            this.label3.Text = "File name (default: Audio)";
             // 
             // notificationLbl
             // 
@@ -210,31 +210,62 @@
             // 
             // selectActiveTextBtn
             // 
-            this.selectActiveTextBtn.BackColor = System.Drawing.Color.OliveDrab;
+            this.selectActiveTextBtn.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.selectActiveTextBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.selectActiveTextBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.selectActiveTextBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.selectActiveTextBtn.Location = new System.Drawing.Point(390, 432);
+            this.selectActiveTextBtn.Location = new System.Drawing.Point(353, 442);
             this.selectActiveTextBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.selectActiveTextBtn.Name = "selectActiveTextBtn";
-            this.selectActiveTextBtn.Size = new System.Drawing.Size(104, 66);
+            this.selectActiveTextBtn.Size = new System.Drawing.Size(97, 46);
             this.selectActiveTextBtn.TabIndex = 17;
-            this.selectActiveTextBtn.Text = "Select Text";
+            this.selectActiveTextBtn.Text = "Isolate text";
             this.selectActiveTextBtn.UseVisualStyleBackColor = false;
             this.selectActiveTextBtn.Click += new System.EventHandler(this.selectActiveTextBtn_Click);
             // 
-            // listView1
+            // ssmlMarkupLangListBox
             // 
-            this.listView1.AllowDrop = true;
-            this.listView1.HideSelection = false;
-            listViewItem3.Tag = "insert";
-            listViewItem4.ToolTipText = "p is paragraph. s is sentence";
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.listView1.Location = new System.Drawing.Point(547, 174);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(219, 130);
-            this.listView1.TabIndex = 18;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.ssmlMarkupLangListBox.FormattingEnabled = true;
+            this.ssmlMarkupLangListBox.ItemHeight = 15;
+            this.ssmlMarkupLangListBox.Location = new System.Drawing.Point(662, 174);
+            this.ssmlMarkupLangListBox.Name = "ssmlMarkupLangListBox";
+            this.ssmlMarkupLangListBox.Size = new System.Drawing.Size(231, 214);
+            this.ssmlMarkupLangListBox.TabIndex = 19;
+            // 
+            // resetSsmlMarkupLangListBox
+            // 
+            this.resetSsmlMarkupLangListBox.Location = new System.Drawing.Point(662, 122);
+            this.resetSsmlMarkupLangListBox.Name = "resetSsmlMarkupLangListBox";
+            this.resetSsmlMarkupLangListBox.Size = new System.Drawing.Size(33, 23);
+            this.resetSsmlMarkupLangListBox.TabIndex = 20;
+            this.resetSsmlMarkupLangListBox.Text = "<";
+            this.resetSsmlMarkupLangListBox.UseVisualStyleBackColor = true;
+            // 
+            // ssmlOptionBreadcrumbTxt
+            // 
+            this.ssmlOptionBreadcrumbTxt.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ssmlOptionBreadcrumbTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ssmlOptionBreadcrumbTxt.Enabled = false;
+            this.ssmlOptionBreadcrumbTxt.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.ssmlOptionBreadcrumbTxt.Location = new System.Drawing.Point(662, 151);
+            this.ssmlOptionBreadcrumbTxt.Name = "ssmlOptionBreadcrumbTxt";
+            this.ssmlOptionBreadcrumbTxt.Size = new System.Drawing.Size(235, 14);
+            this.ssmlOptionBreadcrumbTxt.TabIndex = 21;
+            this.ssmlOptionBreadcrumbTxt.Text = "Breadcrumb";
+            // 
+            // toggleSsmlMarkupUseBtn
+            // 
+            this.toggleSsmlMarkupUseBtn.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.toggleSsmlMarkupUseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.toggleSsmlMarkupUseBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.toggleSsmlMarkupUseBtn.Location = new System.Drawing.Point(234, 442);
+            this.toggleSsmlMarkupUseBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.toggleSsmlMarkupUseBtn.Name = "toggleSsmlMarkupUseBtn";
+            this.toggleSsmlMarkupUseBtn.Size = new System.Drawing.Size(113, 46);
+            this.toggleSsmlMarkupUseBtn.TabIndex = 22;
+            this.toggleSsmlMarkupUseBtn.Text = "Basic mode";
+            this.toggleSsmlMarkupUseBtn.UseVisualStyleBackColor = false;
+            this.toggleSsmlMarkupUseBtn.Click += new System.EventHandler(this.toggleSsmlMarkupUseBtn_Click);
             // 
             // Main
             // 
@@ -242,7 +273,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(909, 501);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.toggleSsmlMarkupUseBtn);
+            this.Controls.Add(this.ssmlOptionBreadcrumbTxt);
+            this.Controls.Add(this.resetSsmlMarkupLangListBox);
+            this.Controls.Add(this.ssmlMarkupLangListBox);
             this.Controls.Add(this.selectActiveTextBtn);
             this.Controls.Add(this.notificationLbl);
             this.Controls.Add(this.label3);
@@ -260,6 +294,7 @@
             this.Controls.Add(this.listenBtn);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Main";
             this.Text = "Main";
@@ -288,7 +323,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox notificationLbl;
         private System.Windows.Forms.Button selectActiveTextBtn;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListBox ssmlMarkupLangListBox;
+        private System.Windows.Forms.Button resetSsmlMarkupLangListBox;
+        private System.Windows.Forms.TextBox ssmlOptionBreadcrumbTxt;
+        private System.Windows.Forms.Button toggleSsmlMarkupUseBtn;
     }
 }
 
