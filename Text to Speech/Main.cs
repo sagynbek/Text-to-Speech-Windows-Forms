@@ -12,6 +12,7 @@ namespace Text_to_Speech
         SpeechSynthesizer speechSynthesizer;
         SelectableText selectableTextInstance;
         SsmlOptionsController ssmlOptionsController;
+        bool isSsmlMarkupInUse = true;
         int audioCount = 0;
         
 
@@ -51,8 +52,8 @@ namespace Text_to_Speech
         {
             ReInitSynthesizer();
 
-            speechSynthesizer.SpeakSsmlAsync(GetSsmlText());
-            //speechSynthesizer.SpeakAsync(GetTextToRead());
+            if( isSsmlMarkupInUse) { speechSynthesizer.SpeakSsmlAsync(GetSsmlText()); }
+            else { speechSynthesizer.SpeakAsync(GetTextToRead()); }
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
@@ -66,7 +67,10 @@ namespace Text_to_Speech
             var audioName = fileName + ".wav";
 
             speechSynthesizer.SetOutputToWaveFile(path + audioName);
-            speechSynthesizer.SpeakAsync(GetTextToSave());
+
+            if (isSsmlMarkupInUse) { speechSynthesizer.SpeakSsmlAsync(GetSsmlTextToSave()); }
+            else { speechSynthesizer.SpeakAsync(GetTextToSave()); }
+
             Notify("Saved as: " + audioName);
         }
 
@@ -130,6 +134,10 @@ namespace Text_to_Speech
         {
             return SsmlConverter.ConvertTextIntoSSML(GetTextToRead(), speechSynthesizer);
         }
+        private string GetSsmlTextToSave()
+        {
+            return SsmlConverter.ConvertTextIntoSSML(GetTextToSave(), speechSynthesizer);
+        }
         private string GetTextToRead()
         {
             return textToRead.SelectionLength > 0 ? textToRead.SelectedText : textToRead.Text;
@@ -151,15 +159,23 @@ namespace Text_to_Speech
             {
                 selectableTextInstance.DisplayOriginal();
             }
-            // Button text: "Select Text"
+            // Button text: "Isolate text"
             else
             { 
-                selectableTextInstance.SelectActiveText();
+                selectableTextInstance.IsolateSelectedText();
             }
 
             selectActiveTextBtn.Text = selectableTextInstance.IsSelectedDisplayedOnly() ? 
                 "Show Original" 
-                : "Select Text";
+                : "Isolate text";
+        }
+
+        private void toggleSsmlMarkupUseBtn_Click(object sender, EventArgs e)
+        {
+            isSsmlMarkupInUse = !isSsmlMarkupInUse;
+
+            ssmlOptionsController.ToggleVisibility(isSsmlMarkupInUse);
+            toggleSsmlMarkupUseBtn.Text = isSsmlMarkupInUse ? "Basic mode" : "Advanced mode";
         }
     }
 }

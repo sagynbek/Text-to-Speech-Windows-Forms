@@ -32,6 +32,18 @@ namespace Text_to_Speech
             this.SetItems();
         }
 
+
+        internal void ToggleVisibility(bool isVisible)
+        {
+            if (!isVisible)
+            {
+                trackUserOptions.Clear();
+                this.SetItems();
+            }
+            breadcrumbText.Visible = isVisible;
+            listBox.Visible = isVisible;
+        }
+
         private void InitializeOptions()
         {
             this.options.Clear();

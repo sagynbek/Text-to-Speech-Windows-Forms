@@ -25,7 +25,7 @@ namespace Text_to_Speech
             this.textBox = textBox;
         }
 
-        public bool SelectActiveText()
+        public bool IsolateSelectedText()
         {
             if (textBox.SelectionLength > 0)
             {

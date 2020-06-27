@@ -46,6 +46,7 @@
             this.ssmlMarkupLangListBox = new System.Windows.Forms.ListBox();
             this.resetSsmlMarkupLangListBox = new System.Windows.Forms.Button();
             this.ssmlOptionBreadcrumbTxt = new System.Windows.Forms.TextBox();
+            this.toggleSsmlMarkupUseBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sliderVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderRate)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +55,7 @@
             // 
             this.listenBtn.BackColor = System.Drawing.Color.DarkCyan;
             this.listenBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.listenBtn.Location = new System.Drawing.Point(662, 432);
+            this.listenBtn.Location = new System.Drawing.Point(681, 432);
             this.listenBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listenBtn.Name = "listenBtn";
             this.listenBtn.Size = new System.Drawing.Size(104, 66);
@@ -110,7 +111,7 @@
             this.stopBtn.BackColor = System.Drawing.Color.DarkRed;
             this.stopBtn.Enabled = false;
             this.stopBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.stopBtn.Location = new System.Drawing.Point(514, 432);
+            this.stopBtn.Location = new System.Drawing.Point(553, 432);
             this.stopBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(122, 66);
@@ -207,12 +208,12 @@
             // 
             this.selectActiveTextBtn.BackColor = System.Drawing.Color.OliveDrab;
             this.selectActiveTextBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.selectActiveTextBtn.Location = new System.Drawing.Point(390, 432);
+            this.selectActiveTextBtn.Location = new System.Drawing.Point(443, 432);
             this.selectActiveTextBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.selectActiveTextBtn.Name = "selectActiveTextBtn";
             this.selectActiveTextBtn.Size = new System.Drawing.Size(104, 66);
             this.selectActiveTextBtn.TabIndex = 17;
-            this.selectActiveTextBtn.Text = "Select Text";
+            this.selectActiveTextBtn.Text = "Isolate text";
             this.selectActiveTextBtn.UseVisualStyleBackColor = false;
             this.selectActiveTextBtn.Click += new System.EventHandler(this.selectActiveTextBtn_Click);
             // 
@@ -246,12 +247,26 @@
             this.ssmlOptionBreadcrumbTxt.TabIndex = 21;
             this.ssmlOptionBreadcrumbTxt.Text = "Breadcrumb";
             // 
+            // toggleSsmlMarkupUseBtn
+            // 
+            this.toggleSsmlMarkupUseBtn.BackColor = System.Drawing.Color.Olive;
+            this.toggleSsmlMarkupUseBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.toggleSsmlMarkupUseBtn.Location = new System.Drawing.Point(333, 432);
+            this.toggleSsmlMarkupUseBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.toggleSsmlMarkupUseBtn.Name = "toggleSsmlMarkupUseBtn";
+            this.toggleSsmlMarkupUseBtn.Size = new System.Drawing.Size(104, 66);
+            this.toggleSsmlMarkupUseBtn.TabIndex = 22;
+            this.toggleSsmlMarkupUseBtn.Text = "Basic mode";
+            this.toggleSsmlMarkupUseBtn.UseVisualStyleBackColor = false;
+            this.toggleSsmlMarkupUseBtn.Click += new System.EventHandler(this.toggleSsmlMarkupUseBtn_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(909, 501);
+            this.Controls.Add(this.toggleSsmlMarkupUseBtn);
             this.Controls.Add(this.ssmlOptionBreadcrumbTxt);
             this.Controls.Add(this.resetSsmlMarkupLangListBox);
             this.Controls.Add(this.ssmlMarkupLangListBox);
@@ -303,6 +318,7 @@
         private System.Windows.Forms.ListBox ssmlMarkupLangListBox;
         private System.Windows.Forms.Button resetSsmlMarkupLangListBox;
         private System.Windows.Forms.TextBox ssmlOptionBreadcrumbTxt;
+        private System.Windows.Forms.Button toggleSsmlMarkupUseBtn;
     }
 }
 
