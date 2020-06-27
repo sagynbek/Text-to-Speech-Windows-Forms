@@ -38,20 +38,20 @@ namespace Text_to_Speech
             this.options.Clear();
 
             {
-                SsmlOption breakOption = new SsmlOption("break");
+                SsmlOption breakOption = new SsmlOption("break", "Break", OptionType.Insert);
 
                 SsmlOption strengthOption = new SsmlOption("strength");
-                strengthOption.AddToChildren(new SsmlOption("x-weak", OptionType.Insert));
-                strengthOption.AddToChildren(new SsmlOption("weak", OptionType.Insert));
-                strengthOption.AddToChildren(new SsmlOption("medium", OptionType.Insert));
-                strengthOption.AddToChildren(new SsmlOption("strong", OptionType.Insert));
-                strengthOption.AddToChildren(new SsmlOption("x-strong", OptionType.Insert));
+                strengthOption.AddToChildren(new SsmlOption("x-weak"));
+                strengthOption.AddToChildren(new SsmlOption("weak"));
+                strengthOption.AddToChildren(new SsmlOption("medium"));
+                strengthOption.AddToChildren(new SsmlOption("strong"));
+                strengthOption.AddToChildren(new SsmlOption("x-strong"));
 
                 SsmlOption timeOption = new SsmlOption("time");
-                timeOption.AddToChildren(new SsmlOption("500ms", OptionType.Insert));
-                timeOption.AddToChildren(new SsmlOption("1000ms", OptionType.Insert));
-                timeOption.AddToChildren(new SsmlOption("1500ms", OptionType.Insert));
-                timeOption.AddToChildren(new SsmlOption("2000ms", OptionType.Insert));
+                timeOption.AddToChildren(new SsmlOption("500ms"));
+                timeOption.AddToChildren(new SsmlOption("1000ms"));
+                timeOption.AddToChildren(new SsmlOption("1500ms"));
+                timeOption.AddToChildren(new SsmlOption("2000ms"));
 
 
                 breakOption.AddToChildren(strengthOption);
@@ -59,29 +59,24 @@ namespace Text_to_Speech
 
                 this.options.Add(breakOption);
             }
+            /*
+            {
+                SsmlOption prosodyOption = new SsmlOption("prosody", "Prosody (pitch, rate, volume, duration, contour)", OptionType.Wrap);
 
-            //{
-            //    SsmlOption prosodyOption = new SsmlOption("prosody", OptionType.None, "Prosody (pitch, rate, volume, duration, contour)");
-
-            //    SsmlOption pitchOption = new SsmlOption("pitch");
-            //    pitchOption.AddToChildren(new SsmlOption("x-low", OptionType.Insert));
-            //    pitchOption.AddToChildren(new SsmlOption("weak", OptionType.Insert));
-            //    pitchOption.AddToChildren(new SsmlOption("medium", OptionType.Insert));
-            //    pitchOption.AddToChildren(new SsmlOption("strong", OptionType.Insert));
-            //    pitchOption.AddToChildren(new SsmlOption("x-strong", OptionType.Insert));
-
-            //    SsmlOption timeOption = new SsmlOption("time");
-            //    timeOption.AddToChildren(new SsmlOption("500ms", OptionType.Insert));
-            //    timeOption.AddToChildren(new SsmlOption("1000ms", OptionType.Insert));
-            //    timeOption.AddToChildren(new SsmlOption("1500ms", OptionType.Insert));
-            //    timeOption.AddToChildren(new SsmlOption("2000ms", OptionType.Insert));
+                SsmlOption pitchOption = new SsmlOption("pitch");
+                pitchOption.AddToChildren(new SsmlOption("x-weak"));
+                pitchOption.AddToChildren(new SsmlOption("weak"));
+                pitchOption.AddToChildren(new SsmlOption("medium"));
+                pitchOption.AddToChildren(new SsmlOption("strong"));
+                pitchOption.AddToChildren(new SsmlOption("x-strong"));
 
 
-            //    prosodyOption.AddToChildren(pitchOption);
-            //    prosodyOption.AddToChildren(timeOption);
 
-            //    this.options.Add(prosodyOption);
-            //}
+                prosodyOption.AddToChildren(pitchOption);
+                prosodyOption.AddToChildren(timeOption);
+
+                this.options.Add(prosodyOption);
+            }*/
         }
 
         private void HandleKeyDown(object sender, KeyEventArgs e)
@@ -115,7 +110,7 @@ namespace Text_to_Speech
         {
             trackUserOptions.Add(option.text);
 
-            if( option.optionType != OptionType.None)
+            if( option.isFinalOption())
             {
                 var tags = option.GetTags();
                 

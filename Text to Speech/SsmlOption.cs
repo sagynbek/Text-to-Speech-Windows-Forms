@@ -21,7 +21,7 @@ namespace Text_to_Speech
         public string tag;
         public OptionType optionType = OptionType.None;
 
-        public SsmlOption(string tag, OptionType optionType = OptionType.None, string text=null)
+        public SsmlOption(string tag, string text = null, OptionType optionType = OptionType.None)
         {
             this.tag = tag;
             this.text = text==null? tag:text;
@@ -48,7 +48,7 @@ namespace Text_to_Speech
             if (allParents.Count == 3)
             {
                 openingTag = $" <{allParents[0].tag} {allParents[1].tag}='{allParents[2].tag}'";
-                if(this.optionType == OptionType.Insert)
+                if(allParents[0].optionType == OptionType.Insert)
                 {
                     openingTag += "/> ";
                 }
@@ -64,6 +64,11 @@ namespace Text_to_Speech
             result.Add(closeTag);
 
             return result;
+        }
+
+        public bool isFinalOption()
+        {
+            return children.Count == 0;
         }
     }
 }
