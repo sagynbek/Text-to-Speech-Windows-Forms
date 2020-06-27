@@ -28,8 +28,7 @@ namespace Text_to_Speech
             this.listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HandleKeyDown);
             this.listBox.DoubleClick += new System.EventHandler(this.HandleDoubleClick);
             this.resetButton.Click += new System.EventHandler(this.resetSsmlMarkupLangListBox_Click);
-
-            resetButton.Visible = false;
+            
             this.SetItems();
         }
 
@@ -59,24 +58,48 @@ namespace Text_to_Speech
 
                 this.options.Add(breakOption);
             }
-            /*
+            
             {
-                SsmlOption prosodyOption = new SsmlOption("prosody", "Prosody (pitch, rate, volume, duration, contour)", OptionType.Wrap);
+                SsmlOption prosodyOption = new SsmlOption("prosody", "Prosody (pitch, rate, duration, volume)", OptionType.Wrap);
 
                 SsmlOption pitchOption = new SsmlOption("pitch");
-                pitchOption.AddToChildren(new SsmlOption("x-weak"));
-                pitchOption.AddToChildren(new SsmlOption("weak"));
+                pitchOption.AddToChildren(new SsmlOption("x-low"));
+                pitchOption.AddToChildren(new SsmlOption("low"));
                 pitchOption.AddToChildren(new SsmlOption("medium"));
-                pitchOption.AddToChildren(new SsmlOption("strong"));
-                pitchOption.AddToChildren(new SsmlOption("x-strong"));
+                pitchOption.AddToChildren(new SsmlOption("high"));
+                pitchOption.AddToChildren(new SsmlOption("x-high"));
+                pitchOption.AddToChildren(new SsmlOption("default"));
 
+                SsmlOption rateOption = new SsmlOption("rate");
+                rateOption.AddToChildren(new SsmlOption("x-slow"));
+                rateOption.AddToChildren(new SsmlOption("slow"));
+                rateOption.AddToChildren(new SsmlOption("medium"));
+                rateOption.AddToChildren(new SsmlOption("fast"));
+                rateOption.AddToChildren(new SsmlOption("x-fast"));
+                rateOption.AddToChildren(new SsmlOption("default"));
+
+                SsmlOption durationOption = new SsmlOption("duration");
+                durationOption.AddToChildren(new SsmlOption("500ms"));
+                durationOption.AddToChildren(new SsmlOption("1000ms"));
+                durationOption.AddToChildren(new SsmlOption("1500ms"));
+                durationOption.AddToChildren(new SsmlOption("2000ms"));
+
+                SsmlOption volumeOption = new SsmlOption("volume");
+                volumeOption.AddToChildren(new SsmlOption("0"));
+                volumeOption.AddToChildren(new SsmlOption("25"));
+                volumeOption.AddToChildren(new SsmlOption("50"));
+                volumeOption.AddToChildren(new SsmlOption("75"));
+                volumeOption.AddToChildren(new SsmlOption("95"));
+                volumeOption.AddToChildren(new SsmlOption("100"));
 
 
                 prosodyOption.AddToChildren(pitchOption);
-                prosodyOption.AddToChildren(timeOption);
+                prosodyOption.AddToChildren(rateOption);
+                prosodyOption.AddToChildren(durationOption);
+                prosodyOption.AddToChildren(volumeOption);
 
                 this.options.Add(prosodyOption);
-            }*/
+            }
         }
 
         private void HandleKeyDown(object sender, KeyEventArgs e)
@@ -101,8 +124,7 @@ namespace Text_to_Speech
             }
 
             if( selectedOption == null) { return; }
-
-            resetButton.Visible = true;
+            
             HandleSelectNewOption(selectedOption);
         }
 
@@ -131,16 +153,11 @@ namespace Text_to_Speech
         private void resetSsmlMarkupLangListBox_Click(object sender, EventArgs e)
         {
             trackUserOptions.RemoveAt(trackUserOptions.Count - 1);
-            if (trackUserOptions.Count == 1)
-            {
-                resetButton.Visible = false;
-            }
             this.SetItems();
         }
 
         private void ResetOptions()
         {
-            resetButton.Visible = false;
             trackUserOptions.Clear();
             this.SetItems();
         }
@@ -158,9 +175,20 @@ namespace Text_to_Speech
             for(var it= 0; it< trackUserOptions.Count; it++)
             {
                 if (breadText!="") { breadText += " > "; }
-                breadText += trackUserOptions[it];
+                breadText += Truncate(trackUserOptions[it], 10);
             }
             breadcrumbText.Text = breadText;
+
+            resetButton.Visible = trackUserOptions.Count > 0;
+        }
+
+        private string Truncate(string text, int max)
+        {
+            if (text.Length > max + 3)
+            {
+                return text.Substring(0, max) + "...";
+            }
+            return text;
         }
 
         private List<SsmlOption> GetActiveOptions()
