@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.IO;
 using System.Speech.Synthesis;
+using System.Collections.Generic;
 using System.Speech.Synthesis.TtsEngine;
 
 
@@ -12,6 +13,7 @@ namespace Text_to_Speech
         SpeechSynthesizer speechSynthesizer;
         SelectableText selectableTextInstance;
         SsmlOptionsController ssmlOptionsController;
+        AudioNameGenerator audioNameGenerator;
         bool isSsmlMarkupInUse = true;
         int audioCount = 0;
         
@@ -31,6 +33,7 @@ namespace Text_to_Speech
 
             selectableTextInstance = new SelectableText(textToRead);
             ssmlOptionsController = new SsmlOptionsController(resetSsmlMarkupLangListBox, ssmlMarkupLangListBox, textToRead, ssmlOptionBreadcrumbTxt);
+            audioNameGenerator = new AudioNameGenerator(fileNameTxt);
         }
 
         private void sliderRate_Scroll(object sender, EventArgs e)
@@ -63,7 +66,7 @@ namespace Text_to_Speech
             path += "\\Audio Files\\";
             Directory.CreateDirectory(path); // Create directory on Desktop
 
-            var fileName = fileNameTxt.Text.Length>0 ? fileNameTxt.Text : ("Audio" + (this.audioCount++).ToString());
+            var fileName = audioNameGenerator.GetFileName();
             var audioName = fileName + ".wav";
 
             speechSynthesizer.SetOutputToWaveFile(path + audioName);
