@@ -38,42 +38,50 @@ namespace Text_to_Speech
             this.options.Clear();
 
             {
-                SsmlOption breakOption = new SsmlOption("Break");
+                SsmlOption breakOption = new SsmlOption("break");
 
                 SsmlOption strengthOption = new SsmlOption("strength");
+                strengthOption.AddToChildren(new SsmlOption("x-weak", OptionType.Insert));
+                strengthOption.AddToChildren(new SsmlOption("weak", OptionType.Insert));
+                strengthOption.AddToChildren(new SsmlOption("medium", OptionType.Insert));
+                strengthOption.AddToChildren(new SsmlOption("strong", OptionType.Insert));
+                strengthOption.AddToChildren(new SsmlOption("x-strong", OptionType.Insert));
 
-                SsmlOption strengthSubOption1 = new SsmlOption("x-weak", OptionType.Insert);
-                SsmlOption strengthSubOption2 = new SsmlOption("x-strong", OptionType.Insert);
-
-                strengthOption.AddToChildren(strengthSubOption1);
-                strengthOption.AddToChildren(strengthSubOption2);
+                SsmlOption timeOption = new SsmlOption("time");
+                timeOption.AddToChildren(new SsmlOption("500ms", OptionType.Insert));
+                timeOption.AddToChildren(new SsmlOption("1000ms", OptionType.Insert));
+                timeOption.AddToChildren(new SsmlOption("1500ms", OptionType.Insert));
+                timeOption.AddToChildren(new SsmlOption("2000ms", OptionType.Insert));
 
 
                 breakOption.AddToChildren(strengthOption);
-                
+                breakOption.AddToChildren(timeOption);
+
                 this.options.Add(breakOption);
             }
-        }
 
-        private List<SsmlOption> GetActiveOptions()
-        {
-            List<SsmlOption> FindChildrenOfItem(List<SsmlOption> targetOptions, string item)
-            {
-                foreach(SsmlOption option in targetOptions) {
-                    if(item == option.text)
-                    {
-                        return option.children;
-                    }
-                }
-                return null;
-            }
+            //{
+            //    SsmlOption prosodyOption = new SsmlOption("prosody", OptionType.None, "Prosody (pitch, rate, volume, duration, contour)");
 
-            var currentOptions = options;
-            foreach(string selectedItem in trackUserOptions)
-            {
-                currentOptions = FindChildrenOfItem(currentOptions, selectedItem);
-            }
-            return currentOptions;
+            //    SsmlOption pitchOption = new SsmlOption("pitch");
+            //    pitchOption.AddToChildren(new SsmlOption("x-low", OptionType.Insert));
+            //    pitchOption.AddToChildren(new SsmlOption("weak", OptionType.Insert));
+            //    pitchOption.AddToChildren(new SsmlOption("medium", OptionType.Insert));
+            //    pitchOption.AddToChildren(new SsmlOption("strong", OptionType.Insert));
+            //    pitchOption.AddToChildren(new SsmlOption("x-strong", OptionType.Insert));
+
+            //    SsmlOption timeOption = new SsmlOption("time");
+            //    timeOption.AddToChildren(new SsmlOption("500ms", OptionType.Insert));
+            //    timeOption.AddToChildren(new SsmlOption("1000ms", OptionType.Insert));
+            //    timeOption.AddToChildren(new SsmlOption("1500ms", OptionType.Insert));
+            //    timeOption.AddToChildren(new SsmlOption("2000ms", OptionType.Insert));
+
+
+            //    prosodyOption.AddToChildren(pitchOption);
+            //    prosodyOption.AddToChildren(timeOption);
+
+            //    this.options.Add(prosodyOption);
+            //}
         }
 
         private void HandleKeyDown(object sender, KeyEventArgs e)
@@ -87,7 +95,6 @@ namespace Text_to_Speech
         private void HandleDoubleClick(object sender, EventArgs e)
         {
             SsmlOption selectedOption = null;
-            resetButton.Visible = true;
             
             foreach (SsmlOption option in GetActiveOptions())
             {
@@ -100,40 +107,29 @@ namespace Text_to_Speech
 
             if( selectedOption == null) { return; }
 
+            resetButton.Visible = true;
             HandleSelectNewOption(selectedOption);
         }
 
         private void HandleSelectNewOption(SsmlOption option)
         {
-            // Go deep into selectedOption
-            if (option.optionType == OptionType.None)
+            trackUserOptions.Add(option.text);
+
+            if( option.optionType != OptionType.None)
             {
-                trackUserOptions.Add(option.text);
+                var tags = option.GetTags();
+                
+                var wrapStart = textToRead.SelectionStart;
+                var wrapEnd = textToRead.SelectionStart + textToRead.SelectionLength;
+
+                string newText = textToRead.Text;
+                newText = newText.Insert(wrapEnd, tags[1]);
+                newText = newText.Insert(wrapStart, tags[0]);
+
+                textToRead.Text = newText;
+                ResetOptions();
             }
-            // Perform action
-            else if(option.optionType == OptionType.Insert)
-            {
-                if (textToRead.SelectionStart>=0)
-                {
-                    textToRead.Text = textToRead.Text.Insert(textToRead.SelectionStart, "Test");
-                    ResetOptions();
-                }
-                else
-                {
-                    MessageBox.Show("Please put cursor on the place in textarea");
-                }
-            }
-            else if (option.optionType == OptionType.Wrap)
-            {
-                if (textToRead.SelectionLength > 0)
-                {
-                    /** TODO continue */
-                }
-                else
-                {
-                    MessageBox.Show("Please select text in textarea");
-                }
-            }
+
             this.SetItems();
         }
 
@@ -172,5 +168,26 @@ namespace Text_to_Speech
             breadcrumbText.Text = breadText;
         }
 
+        private List<SsmlOption> GetActiveOptions()
+        {
+            List<SsmlOption> FindChildrenOfItem(List<SsmlOption> targetOptions, string item)
+            {
+                foreach (SsmlOption option in targetOptions)
+                {
+                    if (item == option.text)
+                    {
+                        return option.children;
+                    }
+                }
+                return null;
+            }
+
+            var currentOptions = options;
+            foreach (string selectedItem in trackUserOptions)
+            {
+                currentOptions = FindChildrenOfItem(currentOptions, selectedItem);
+            }
+            return currentOptions;
+        }
     }
 }
