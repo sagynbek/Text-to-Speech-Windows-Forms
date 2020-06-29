@@ -8,7 +8,7 @@
 ___
 ## Key features: 
 - Offline
-- Download audio
+- Listen/Download audio
 - SSML support
 - Windows OS
 - Free
@@ -20,9 +20,9 @@ ___
 ### SSML
 Additionally it fully supports SSML (Speech Synthesis Markup Language, [Read docs](https://docs.microsoft.com/en-us/cortana/skills/speech-synthesis-markup-language))
 
-You can select text, and choose your SSML from right box. Example use cases: pause for certain period, increase/decrease volume, change reading rate and etc. Selection box does not include all possibilities. For more SSML options, please refer to [Docs](https://docs.microsoft.com/en-us/cortana/skills/speech-synthesis-markup-language)
+You can select text, and choose your SSML from right box. Example use cases: _pause_ for certain period, _increase/decrease volume_, change _reading rate_ and etc. Selection box does not support all features, but you can add them on your own. For more SSML options, please refer to [Docs](https://docs.microsoft.com/en-us/cortana/skills/speech-synthesis-markup-language)
 
-> Note: If text is has incorrect use of SSML, then it will not read at all.
+> Note: If text has incorrect use of SSML, then it may not read at all.
 
 ___
 ### Basic/Advaanced mode
