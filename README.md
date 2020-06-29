@@ -1,5 +1,7 @@
 # Text to Speech
 
+
+> <a href="./downloads/Portable_TextToSpeech_1.0.10.zip?raw=true" download>**Click to Download**</a> Portable zip (Easy run)
 > <a href="./downloads/TextToSpeech_1.0.10.zip?raw=true" download>**Click to Download**</a> Installation zip
 
 ## Key features: 
