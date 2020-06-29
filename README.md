@@ -2,8 +2,15 @@
 
 > <a href="./downloads/TextToSpeech_1.0.10.zip" download>**Click to Download**</a> Installation zip
 
+## Key features: 
+- Offline
+- Download audio
+- SSML support
+- Windows OS
+- Free
 
-Text-to-Speech application. This app is build on top of Windows Form, uses Windows installed Synthesis. 
+
+Text-to-Speech application. This app is Free to use, offline application. Build on top of Windows Form, uses Windows installed Synthesis. 
 You choose one of the available voices, and make it read text, download as `.wav` file on your Desktop, under `Audio Files` folder.
 
 ### SSML
