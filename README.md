@@ -1,6 +1,6 @@
 # Text to Speech
 
-> <a href="./downloads/TextToSpeech_1.0.10.zip" download>**Click to Download**</a> Installation zip
+> <a href="./downloads/TextToSpeech_1.0.10.zip?raw=true" download>**Click to Download**</a> Installation zip
 
 ## Key features: 
 - Offline
