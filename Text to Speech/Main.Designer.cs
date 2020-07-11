@@ -48,6 +48,7 @@
             this.resetSsmlMarkupLangListBox = new System.Windows.Forms.Button();
             this.ssmlOptionBreadcrumbTxt = new System.Windows.Forms.TextBox();
             this.toggleSsmlMarkupUseBtn = new System.Windows.Forms.Button();
+            this.ssmlDocLink = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.sliderVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderRate)).BeginInit();
             this.SuspendLayout();
@@ -268,12 +269,24 @@
             this.toggleSsmlMarkupUseBtn.UseVisualStyleBackColor = false;
             this.toggleSsmlMarkupUseBtn.Click += new System.EventHandler(this.toggleSsmlMarkupUseBtn_Click);
             // 
+            // ssmlDocLink
+            // 
+            this.ssmlDocLink.AutoSize = true;
+            this.ssmlDocLink.Location = new System.Drawing.Point(777, 126);
+            this.ssmlDocLink.Name = "ssmlDocLink";
+            this.ssmlDocLink.Size = new System.Drawing.Size(116, 15);
+            this.ssmlDocLink.TabIndex = 23;
+            this.ssmlDocLink.TabStop = true;
+            this.ssmlDocLink.Text = "More SSML options";
+            this.ssmlDocLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ssmlDocLink_LinkClicked);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(909, 501);
+            this.Controls.Add(this.ssmlDocLink);
             this.Controls.Add(this.toggleSsmlMarkupUseBtn);
             this.Controls.Add(this.ssmlOptionBreadcrumbTxt);
             this.Controls.Add(this.resetSsmlMarkupLangListBox);
@@ -329,6 +342,7 @@
         private System.Windows.Forms.Button resetSsmlMarkupLangListBox;
         private System.Windows.Forms.TextBox ssmlOptionBreadcrumbTxt;
         private System.Windows.Forms.Button toggleSsmlMarkupUseBtn;
+        private System.Windows.Forms.LinkLabel ssmlDocLink;
     }
 }
 

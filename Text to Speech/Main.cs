@@ -4,7 +4,7 @@ using System.IO;
 using System.Speech.Synthesis;
 using System.Collections.Generic;
 using System.Speech.Synthesis.TtsEngine;
-
+using System.Diagnostics;
 
 namespace Text_to_Speech
 {
@@ -179,6 +179,11 @@ namespace Text_to_Speech
 
             ssmlOptionsController.ToggleVisibility(isSsmlMarkupInUse);
             toggleSsmlMarkupUseBtn.Text = isSsmlMarkupInUse ? "Basic mode" : "Advanced mode";
+        }
+
+        private void ssmlDocLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://docs.microsoft.com/en-us/cortana/skills/speech-synthesis-markup-language");
         }
     }
 }
