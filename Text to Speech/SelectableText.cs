@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Text_to_Speech
 {
@@ -16,13 +17,24 @@ namespace Text_to_Speech
     class SelectableText
     {
         private TextBox textBox;
-        private string originalText = "";
+        private Label textBoxLabel;
+        private string originalText = ""; // 
+        private string initSelectedText = ""; // keeps text which was originally selected
         private SelectableTextState state = SelectableTextState.None;
         private int selectionLength, selectionStart;
 
-        public SelectableText(TextBox textBox)
+        private Color isolationBackColor = SystemColors.InactiveCaptionText;
+        private Color isolationForeColor = SystemColors.ControlLightLight;
+
+        private Color defaultBackColor = Color.White;
+        private Color defaultForeColor = SystemColors.WindowText;
+
+
+        public SelectableText(TextBox textBox, Label textBoxLabel)
         {
             this.textBox = textBox;
+            this.textBoxLabel = textBoxLabel;
+            InitValues();
         }
 
         public bool IsolateSelectedText()
@@ -32,9 +44,9 @@ namespace Text_to_Speech
                 originalText = textBox.Text;
                 selectionStart = textBox.SelectionStart;
                 selectionLength = textBox.SelectionLength;
-                textBox.Text = textBox.SelectedText;
+                initSelectedText = textBox.Text = textBox.SelectedText;
 
-                state = SelectableTextState.OnlySelectedDisplayed;
+                IsolationListener();
 
                 return true;
             }
@@ -44,6 +56,14 @@ namespace Text_to_Speech
             }
         }
 
+        private void IsolationListener()
+        {
+            state = SelectableTextState.OnlySelectedDisplayed;
+            textBox.BackColor = isolationBackColor;
+            textBox.ForeColor= isolationForeColor;
+            textBoxLabel.Text += " (Isolated mode ON)";
+        }
+
         public bool IsSelectedDisplayedOnly()
         {
             return state == SelectableTextState.OnlySelectedDisplayed;
@@ -51,12 +71,35 @@ namespace Text_to_Speech
 
         public void DisplayOriginal()
         {
-            if(state != SelectableTextState.OnlySelectedDisplayed) { return; }
+            if (state != SelectableTextState.OnlySelectedDisplayed) { return; }
 
-            state = SelectableTextState.None;
-            textBox.Text = originalText;
+            string textToSet = originalText;
+
+            if (textBox.Text != initSelectedText)
+            {
+                var confirmResult = MessageBox.Show("Do you want to apply changes?", "Apply changes", MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    textToSet = textToSet.Remove(selectionStart, selectionLength);
+                    textToSet = textToSet.Insert(selectionStart, textBox.Text);
+                    selectionLength = textBox.Text.Length;
+                }
+            }
+            textBox.Text = textToSet;
             textBox.Select(selectionStart, selectionLength);
-            originalText = "";
+
+            InitValues();
+        }
+
+        private void InitValues()
+        {
+            state = SelectableTextState.None;
+            initSelectedText = originalText = "";
+
+            textBoxLabel.Text = textBoxLabel.Text.Replace(" (Isolated mode ON)", "");
+
+            textBox.BackColor = defaultBackColor;
+            textBox.ForeColor = defaultForeColor;
         }
     }
 }

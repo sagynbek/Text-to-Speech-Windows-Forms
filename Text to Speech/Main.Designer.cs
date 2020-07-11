@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.listenBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxLabel = new System.Windows.Forms.Label();
             this.textToRead = new System.Windows.Forms.TextBox();
             this.cmbVoice = new System.Windows.Forms.ComboBox();
             this.stopBtn = new System.Windows.Forms.Button();
@@ -80,17 +80,18 @@
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
-            // label1
+            // textBoxLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 151);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Text";
+            this.textBoxLabel.AutoSize = true;
+            this.textBoxLabel.Location = new System.Drawing.Point(17, 151);
+            this.textBoxLabel.Name = "textBoxLabel";
+            this.textBoxLabel.Size = new System.Drawing.Size(30, 15);
+            this.textBoxLabel.TabIndex = 2;
+            this.textBoxLabel.Text = "Text";
             // 
             // textToRead
             // 
+            this.textToRead.BackColor = System.Drawing.SystemColors.Window;
             this.textToRead.HideSelection = false;
             this.textToRead.Location = new System.Drawing.Point(20, 174);
             this.textToRead.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -271,7 +272,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(909, 501);
             this.Controls.Add(this.toggleSsmlMarkupUseBtn);
             this.Controls.Add(this.ssmlOptionBreadcrumbTxt);
@@ -289,7 +290,7 @@
             this.Controls.Add(this.stopBtn);
             this.Controls.Add(this.cmbVoice);
             this.Controls.Add(this.textToRead);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxLabel);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.listenBtn);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -310,7 +311,7 @@
 
         private System.Windows.Forms.Button listenBtn;
         private System.Windows.Forms.Button saveBtn;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label textBoxLabel;
         private System.Windows.Forms.TextBox textToRead;
         private System.Windows.Forms.ComboBox cmbVoice;
         private System.Windows.Forms.Button stopBtn;

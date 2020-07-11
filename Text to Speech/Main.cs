@@ -31,7 +31,7 @@ namespace Text_to_Speech
             UpdateVolumeLabel();
             Notify("");
 
-            selectableTextInstance = new SelectableText(textToRead);
+            selectableTextInstance = new SelectableText(textToRead, textBoxLabel);
             ssmlOptionsController = new SsmlOptionsController(resetSsmlMarkupLangListBox, ssmlMarkupLangListBox, textToRead, ssmlOptionBreadcrumbTxt);
             audioNameGenerator = new AudioNameGenerator(fileNameTxt);
         }
