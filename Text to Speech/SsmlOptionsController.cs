@@ -51,30 +51,38 @@ namespace Text_to_Speech
             {
                 SsmlOption breakOption = new SsmlOption("break", "Break", OptionType.Insert);
 
-                SsmlOption strengthOption = new SsmlOption("strength");
+                SsmlOption strengthOption = new SsmlOption("strength", "Strength");
                 strengthOption.AddToChildren(new SsmlOption("x-weak"));
                 strengthOption.AddToChildren(new SsmlOption("weak"));
                 strengthOption.AddToChildren(new SsmlOption("medium"));
                 strengthOption.AddToChildren(new SsmlOption("strong"));
                 strengthOption.AddToChildren(new SsmlOption("x-strong"));
 
-                SsmlOption timeOption = new SsmlOption("time");
-                timeOption.AddToChildren(new SsmlOption("500ms"));
-                timeOption.AddToChildren(new SsmlOption("1000ms"));
-                timeOption.AddToChildren(new SsmlOption("1500ms"));
-                timeOption.AddToChildren(new SsmlOption("2000ms"));
+                SsmlOption timeOption = new SsmlOption("time", "Time");
+                timeOption.AddToChildren(new SsmlOption("100ms", "100 ms"));
+                timeOption.AddToChildren(new SsmlOption("200ms", "200 ms"));
+                timeOption.AddToChildren(new SsmlOption("300ms", "300 ms"));
+                timeOption.AddToChildren(new SsmlOption("400ms", "400 ms"));
+                timeOption.AddToChildren(new SsmlOption("500ms", "500 ms"));
+                timeOption.AddToChildren(new SsmlOption("600ms", "600 ms"));
+                timeOption.AddToChildren(new SsmlOption("700ms", "700 ms"));
+                timeOption.AddToChildren(new SsmlOption("800ms", "800 ms"));
+                timeOption.AddToChildren(new SsmlOption("900ms", "900 ms"));
+                timeOption.AddToChildren(new SsmlOption("1000ms", "1000 ms"));
+                timeOption.AddToChildren(new SsmlOption("1500ms", "1500 ms"));
+                timeOption.AddToChildren(new SsmlOption("2000ms", "2000 ms"));
 
 
-                breakOption.AddToChildren(strengthOption);
                 breakOption.AddToChildren(timeOption);
+                breakOption.AddToChildren(strengthOption);
 
                 this.options.Add(breakOption);
             }
             
             {
-                SsmlOption prosodyOption = new SsmlOption("prosody", "Prosody (pitch, rate, duration, volume)", OptionType.Wrap);
+                SsmlOption prosodyOption = new SsmlOption("prosody", "Prosody (volume, rate, duration, pitch)", OptionType.Wrap);
 
-                SsmlOption pitchOption = new SsmlOption("pitch");
+                SsmlOption pitchOption = new SsmlOption("pitch", "Pitch");
                 pitchOption.AddToChildren(new SsmlOption("x-low"));
                 pitchOption.AddToChildren(new SsmlOption("low"));
                 pitchOption.AddToChildren(new SsmlOption("medium"));
@@ -82,7 +90,7 @@ namespace Text_to_Speech
                 pitchOption.AddToChildren(new SsmlOption("x-high"));
                 pitchOption.AddToChildren(new SsmlOption("default"));
 
-                SsmlOption rateOption = new SsmlOption("rate");
+                SsmlOption rateOption = new SsmlOption("rate", "Rate");
                 rateOption.AddToChildren(new SsmlOption("x-slow"));
                 rateOption.AddToChildren(new SsmlOption("slow"));
                 rateOption.AddToChildren(new SsmlOption("medium"));
@@ -90,25 +98,28 @@ namespace Text_to_Speech
                 rateOption.AddToChildren(new SsmlOption("x-fast"));
                 rateOption.AddToChildren(new SsmlOption("default"));
 
-                SsmlOption durationOption = new SsmlOption("duration");
-                durationOption.AddToChildren(new SsmlOption("500ms"));
-                durationOption.AddToChildren(new SsmlOption("1000ms"));
-                durationOption.AddToChildren(new SsmlOption("1500ms"));
-                durationOption.AddToChildren(new SsmlOption("2000ms"));
+                SsmlOption durationOption = new SsmlOption("duration", "Duration");
+                durationOption.AddToChildren(new SsmlOption("250ms", "250 ms"));
+                durationOption.AddToChildren(new SsmlOption("500ms", "500 ms"));
+                durationOption.AddToChildren(new SsmlOption("750ms", "750 ms"));
+                durationOption.AddToChildren(new SsmlOption("1000ms", "1000 ms"));
+                durationOption.AddToChildren(new SsmlOption("1250ms", "1250 ms"));
+                durationOption.AddToChildren(new SsmlOption("1500ms", "1500 ms"));
+                durationOption.AddToChildren(new SsmlOption("2000ms", "2000 ms"));
 
-                SsmlOption volumeOption = new SsmlOption("volume");
-                volumeOption.AddToChildren(new SsmlOption("0"));
-                volumeOption.AddToChildren(new SsmlOption("25"));
-                volumeOption.AddToChildren(new SsmlOption("50"));
-                volumeOption.AddToChildren(new SsmlOption("75"));
-                volumeOption.AddToChildren(new SsmlOption("95"));
-                volumeOption.AddToChildren(new SsmlOption("100"));
+                SsmlOption volumeOption = new SsmlOption("volume", "Volume");
+                volumeOption.AddToChildren(new SsmlOption("0", "0%"));
+                volumeOption.AddToChildren(new SsmlOption("25", "25%"));
+                volumeOption.AddToChildren(new SsmlOption("50", "50%"));
+                volumeOption.AddToChildren(new SsmlOption("75", "75%"));
+                volumeOption.AddToChildren(new SsmlOption("95", "95%"));
+                volumeOption.AddToChildren(new SsmlOption("100", "100%"));
 
 
-                prosodyOption.AddToChildren(pitchOption);
+                prosodyOption.AddToChildren(volumeOption);
                 prosodyOption.AddToChildren(rateOption);
                 prosodyOption.AddToChildren(durationOption);
-                prosodyOption.AddToChildren(volumeOption);
+                prosodyOption.AddToChildren(pitchOption);
 
                 this.options.Add(prosodyOption);
             }
